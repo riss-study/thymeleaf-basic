@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:each="user : ${users}"> <!--/* 두개 이상의 태그를 동시에 반복문을 돌리고 싶을 때 사용, 랜더링 결과에서는 이 태그(타임리프 전용 태그)는 사라진다 (평소엔 쓰지 않고 어쩔 수 없이 애매할 때는 사용) */-->
+    <div>
+        사용자 이름1 <span th:text="${user.username}"></span>
+        사용자 나이1 <span th:text="${user.age}"></span>
+    </div>
+    <div>
+        요약 <span th:text="${user.username} + ' / ' + ${user.age}"></span>
+    </div>
+</th:block>
+</body>
+</html>

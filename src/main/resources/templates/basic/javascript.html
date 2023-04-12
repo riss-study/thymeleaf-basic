@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 자바스크립트 인라인 사용 전 (이스케이프 문자를 처리없이 그냥 포함하면, 변수 선언도 안되는 듯) -->
+<script>
+    // 문자 리터럴일 땐 앞뒤에 쌍따옴표를 붙여야 함. 안그러면 userA 라는 문자가 그대로 박혀서 오류남(undefined) (숫자는 쌍따옴표가 필요없어서 그대로 랜더링이 돼 자바스크립트에 잘 들어감)
+    var _username = "[[${user.username}]]";
+    var _age = [[${user.age}]];
+
+    //자바스크립트 내추럴 템플릿 (내추럴 템플릿을 쓰기 어려움. 타임리프로 랜더링해도 [[${user.username}]]은 주석이므로 test username 이 들어갈거임)
+    var _username2 = /*[[${user.username}]]*/ "test username";
+
+    //객체 [[${user}]] 는 user객체.toString()이 호출돼므로 BasicController.User(username=UserA, age=10) 이 반환돼 자바스크립트에 넣을 수 없다(undefined)
+    var _user = [[${user}]];
+
+</script>
+
+<!-- 자바스크립트 인라인 사용 후 (문제가 될 수 있는 쌍따옴표같은 문자가 포함돼있으면 자동으로 이스케이프 처리도 해줌) -->
+<script th:inline="javascript">
+
+    var username = [[${user.username}]];
+    var age = [[${user.age}]];
+
+    //자바스크립트 내추럴 템플릿 (타임리프에서 뒤에 있는 test username 값을 지우고 주석처리된 부분의 값으로 치환한다)
+    var username2 = /*[[${user.username}]]*/ "test username";
+
+    //객체 -> json 으로 자동 변환해줌
+    var user = [[${user}]];
+
+</script>
+
+<!-- 자바스크립트 인라인 each -->
+<script th:inline="javascript">
+
+    [# th:each="user, stat : ${users}"]
+    var user[[${stat.count}]] = [[${user}]];
+    [/]
+
+</script>
+
+
+</body>
+</html>

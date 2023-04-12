@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title,links)">
+    <title th:replace="${title}">레이아웃 타이틀</title>
+
+    <!-- 공통 -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/awesomeapp.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <script type="text/javascript" th:src="@{/sh/scripts/codebase.js}"></script>
+
+    <!-- 추가 (th:block 을 썼으므로 layoutMain 에서 넘긴 link tag 두개가 한줄한줄 보여짐(th:block 태그는 제거))-->
+    <th:block th:replace="${links}"/>
+    </head>

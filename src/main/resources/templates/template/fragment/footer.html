@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="copy">
+  푸터 자리 입니다 By Riss.
+</footer>
+<footer th:fragment="copyParam (param1, param2)">
+  <p>파라미터 자리 입니다 By Riss.</p>
+  <p th:text="${param1}"></p> <!--/* th:fragment 에 이름 넣을 때 () 사이로 argument 를 넣어서 데이터 바인딩이 가능 */-->
+  <p th:text="${param2}"></p>
+</footer>
+</body>
+</html>
